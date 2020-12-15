@@ -47,4 +47,8 @@ public class EmpoloyeeService {
         int count =  employeeMapper.deleteByPrimaryKey(id);
         return count;
     }
+
+    public List<Employee> queryByGender(String gender) {
+        return  employeeMapper.queryByGender(gender);
+    }
 }
