@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.OffsetDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *  处理员工的增删改查
@@ -128,5 +130,19 @@ public class EmployeeController {
         } else {
             return Msg.failed();
         }
+    }
+
+    /**
+     *  获取所有符合性别的员工
+     */
+    @RequestMapping("/employee/query")
+    @ResponseBody
+    public Msg queryEmployee(String gender) {
+         List<Employee> employees = empoloyeeService.queryByGender(gender);
+         Map<String, Object> resultMap = new HashMap<>();
+         Msg success = Msg.success();
+         resultMap.put("data", employees);
+         success.setExtend(resultMap);
+        return success;
     }
 }
